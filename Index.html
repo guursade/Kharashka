@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="so">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Kharash App — Qurux badan</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="title">
+        <div class="logo">K</div>
+        <div>
+          <h1>Kharash App</h1>
+          <div style="font-size:13px;color:var(--muted)">Xisaabi dakhli & kharash si fudud</div>
+        </div>
+      </div>
+      <div class="actions">
+        <button id="btnExport" class="small button-ghost">Export JSON</button>
+        <button id="btnImport" class="small button-ghost">Import</button>
+        <input id="importFile" type="file" accept=".json" style="display:none"/>
+      </div>
+    </div>
+
+    <div class="card grid">
+      <div>
+        <div class="kpis" style="margin-bottom:12px">
+          <div class="kpi">
+            <div class="label">Dakhli (bil)</div>
+            <div id="kpiIncome" class="value">0</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Kharash (bil)</div>
+            <div id="kpiExpense" class="value">0</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Haragay</div>
+            <div id="kpiBalance" class="value">0</div>
+          </div>
+          <div class="kpi">
+            <div class="label">Miisaaniyad</div>
+            <div id="kpiBudget" class="value">—</div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:12px">
+          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:8px">
+            <input id="monthPicker" type="month" style="flex:1"/>
+            <input id="budgetInput" type="number" placeholder="Miisaaniyad bil (tusaale 50000)" style="flex:1"/>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <select id="type" style="flex:1">
+              <option value="income">Dakhli</option>
+              <option value="expense" selected>Kharash</option>
+            </select>
+            <select id="category" style="flex:1"></select>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+            <input id="date" type="date" style="flex:1"/>
+            <input id="amount" type="number" placeholder="Lacagta" style="flex:1"/>
+          </div>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <input id="note" type="text" placeholder="Faahfaahin (tusaale: Kirada Guriga)" style="flex:1"/>
+            <button id="btnAdd" class="primary small">Ku dar</button>
+            <button id="btnClearMonth" class="small button-ghost">Tirtir Bilkan</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:0 0 8px 0">Liiska (bilkan)</h3>
+          <div class="list">
+            <table class="table" id="txTable">
+              <thead><tr><th>Taariikh</th><th>Nooc</th><th>Qayb</th><th>Lacag</th><th>Faahfaahin</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3 style="margin:0 0 8px 0">Jaantus & Qaybaha</h3>
+          <canvas id="chart" width="400" height="320"></canvas>
+          <div id="legend" class="legend"></div>
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h3 style="margin:0 0 8px 0">Qaybaha Caadiga ah</h3>
+          <div id="cats"></div>
+          <div style="margin-top:8px;display:flex;gap:8px">
+            <input id="newCat" placeholder="Qayb Cusub" style="flex:1"/>
+            <button id="btnAddCat" class="small button-ghost">Ku dar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Xogtaada waxay ku kaydsan tahay qalabkaaga (local). Isticmaal Export/Import haddii aad rabto backup.</div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('service-worker.js').catch(()=>{});}</script>
+</body>
+</html>
