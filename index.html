@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="so">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Kharash App</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css"/>
+  <meta name="theme-color" content="#1e90ff"/>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Kharash App</h1>
+      <div class="actions">
+        <button id="btnExport" class="secondary">Export</button>
+        <button id="btnImport" class="secondary">Import</button>
+        <input id="importFile" type="file" accept=".json" style="display:none"/>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row">
+        <div>
+          <label>Bil / Sanad</label>
+          <input type="month" id="monthPicker"/>
+        </div>
+        <div>
+          <label>Miisaaniyad (Budget) Bilkan</label>
+          <input type="number" id="budgetInput" placeholder="tusaale: 100000"/>
+        </div>
+      </div>
+      <div class="kpi">
+        <div class="item">
+          <div class="label">Dakhli (bilkan)</div>
+          <div id="kpiIncome" class="value">0</div>
+        </div>
+        <div class="item">
+          <div class="label">Kharash (bilkan)</div>
+          <div id="kpiExpense" class="value">0</div>
+        </div>
+        <div class="item">
+          <div class="label">Haragay (Income − Expense)</div>
+          <div id="kpiBalance" class="value">0</div>
+        </div>
+        <div class="item">
+          <div class="label">Vs Budget</div>
+          <div id="kpiVsBudget" class="value">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Ku dar Diiwaangelin Cusub</h3>
+        <div class="row">
+          <div>
+            <label>Nooca</label>
+            <select id="type">
+              <option value="income">Dakhli</option>
+              <option value="expense" selected>Kharash</option>
+            </select>
+          </div>
+          <div>
+            <label>Qaybta (Category)</label>
+            <select id="category"></select>
+          </div>
+        </div>
+        <div class="row">
+          <div>
+            <label>Taariikh</label>
+            <input type="date" id="date"/>
+          </div>
+          <div>
+            <label>Lacagta</label>
+            <input type="number" id="amount" placeholder="0"/>
+          </div>
+        </div>
+        <div>
+          <label>Faahfaahin</label>
+          <input type="text" id="note" placeholder="tusaale: Kirada Guriga"/>
+        </div>
+        <div class="row" style="margin-top:10px">
+          <button id="btnAdd">Ku dar</button>
+          <button id="btnClearMonth" class="danger">Tirtir Bilkan</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Jaantus Qaybaha</h3>
+        <canvas id="pie"></canvas>
+        <div id="legend" style="margin-top:10px"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Liiska Diiwaangelinta (bilkan)</h3>
+      <table class="table" id="txTable">
+        <thead>
+          <tr>
+            <th>Taariikh</th><th>Nooc</th><th>Qayb</th><th>Lacag</th><th>Faahfaahin</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div class="footer">
+      © Kharash App — xogtaada waxay ku kaydsan tahay qalabkaaga (local).
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js').catch(()=>{});
+      });
+    }
+  </script>
+</body>
+</html>
